@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, SOCIALS, FREELANCE } from '../config';
+---
+
+<Base title="Contact" description="Get in touch with Rajat Pal about freelance GenAI, RAG, or backend projects.">
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Contact</p>
+      <h1>Let's talk</h1>
+      <p class="lead">
+        Have a project in mind, a role to discuss, or a question about something I wrote? Email is the fastest way to reach
+        me.
+      </p>
+
+      <a class="card email" href={`mailto:${SITE.email}`}>
+        <span class="muted">Email</span>
+        <strong>{SITE.email}</strong>
+      </a>
+
+      <p class="hint muted">
+        For project inquiries, a few lines on what you're building, your timeline, and any existing setup help me reply
+        with something useful.
+      </p>
+
+      <h2 style="margin-top:48px">Elsewhere</h2>
+      <ul class="profiles">
+        {
+          [...SOCIALS, ...FREELANCE].map((s) => (
+            <li>
+              <a class="btn" href={s.href} target="_blank" rel="noopener noreferrer">
+                {s.label} ↗
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow {
+    max-width: 720px;
+  }
+  .email {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 32px;
+    color: var(--text);
+    font-size: 1.25rem;
+    transition: border-color 0.15s ease;
+    overflow-wrap: anywhere;
+  }
+  .email:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+  }
+  .email .muted {
+    font-size: 0.85rem;
+  }
+  .hint {
+    margin-top: 16px;
+    font-size: 0.95rem;
+  }
+  .profiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>

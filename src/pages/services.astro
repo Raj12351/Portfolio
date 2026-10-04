@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import { SERVICES } from '../config';
+
+const process = [
+  { step: '01', title: 'Discovery call', body: 'We talk through the problem, your data, and what "good" looks like. Free, about 30 minutes.' },
+  { step: '02', title: 'Scope & plan', body: 'A short written plan: approach, milestones, risks, and a fixed estimate or hourly range.' },
+  { step: '03', title: 'Build & evaluate', body: 'Working increments you can try early, with evaluation built in rather than added at the end.' },
+  { step: '04', title: 'Ship & hand over', body: 'Deployment, documentation, and a walkthrough so your team can own it.' },
+];
+---
+
+<Base title="Services" description="Freelance GenAI and backend engineering: RAG systems, AI agents, LLM evaluation, and APIs.">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Services</p>
+      <h1>How I can help</h1>
+      <p class="lead">
+        I take on freelance and contract work where GenAI needs to work reliably, not just in a demo. Good fits are
+        startups adding AI features and teams that need an extra engineer for a GenAI build.
+      </p>
+
+      <div class="grid grid-2" style="margin-top:40px">
+        {
+          SERVICES.map((s) => (
+            <div class="card">
+              <h3>{s.title}</h3>
+              <p class="muted" style="margin:0">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>How a project works</h2>
+      <ol class="steps">
+        {
+          process.map((p) => (
+            <li class="card">
+              <span class="num">{p.step}</span>
+              <h3>{p.title}</h3>
+              <p class="muted" style="margin:0">{p.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div style="margin-top:36px">
+        <a class="btn btn-primary" href="/contact">Start a conversation</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+  }
+  .num {
+    display: block;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+</style>

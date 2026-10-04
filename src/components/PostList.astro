@@ -1,0 +1,87 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+{
+  posts.length === 0 ? (
+    <p class="muted">First posts are on the way. Notes on RAG, AI agents, and building GenAI for production.</p>
+  ) : (
+    <ul class="posts">
+      {posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}`}>
+            <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+            <span class="title">
+              {post.data.title}
+              {post.data.draft && <span class="draft">draft</span>}
+            </span>
+            <span class="desc">{post.data.description}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .posts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .posts li + li {
+    border-top: 1px solid var(--border);
+  }
+  .posts a {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 4px 20px;
+    padding: 18px 0;
+    color: var(--text);
+  }
+  .posts a:hover {
+    text-decoration: none;
+  }
+  .posts a:hover .title {
+    color: var(--accent);
+  }
+  time {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    grid-row: span 2;
+    padding-top: 2px;
+  }
+  .title {
+    font-weight: 600;
+  }
+  .desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .draft {
+    margin-left: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 1px 8px;
+    border-radius: 999px;
+    border: 1px dashed var(--accent-2);
+    color: var(--accent-2);
+    vertical-align: middle;
+  }
+  @media (max-width: 560px) {
+    .posts a {
+      grid-template-columns: 1fr;
+    }
+    time {
+      grid-row: auto;
+    }
+  }
+</style>

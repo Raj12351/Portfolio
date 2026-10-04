@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib/content';
+
+const projects = await getProjects();
+---
+
+<Base title="Work" description="Case studies of GenAI platforms, RAG pipelines, and backend systems built by Rajat Pal.">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Work</p>
+      <h1>Things I've built</h1>
+      <p class="lead">
+        Case studies from my professional work. Client-specific details are kept general, but the architecture and
+        decisions are real.
+      </p>
+      <div class="grid grid-2" style="margin-top:40px">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </div>
+  </section>
+</Base>

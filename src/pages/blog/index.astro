@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts } from '../../lib/content';
+
+const posts = await getPosts();
+---
+
+<Base title="Writing" description="Notes by Rajat Pal on RAG, AI agents, LLM evaluation, and building GenAI for production.">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Writing</p>
+      <h1>Notes from building GenAI</h1>
+      <p class="lead">
+        What I learn while shipping RAG systems, agents, and backend services. Practical, with code where it helps.
+        <a href="/rss.xml">Subscribe via RSS</a>.
+      </p>
+      <div style="margin-top:32px">
+        <PostList posts={posts} />
+      </div>
+    </div>
+  </section>
+</Base>

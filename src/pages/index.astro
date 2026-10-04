@@ -1,0 +1,163 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostList from '../components/PostList.astro';
+import { SITE, SERVICES, SKILLS } from '../config';
+import { getPosts, getProjects } from '../lib/content';
+
+const projects = (await getProjects()).filter((p) => p.data.featured);
+const posts = (await getPosts()).slice(0, 3);
+---
+
+<Base>
+  <section class="hero">
+    <div class="container">
+      {
+        SITE.availableForWork && (
+          <p class="status">
+            <span class="dot" aria-hidden="true" /> Available for freelance projects
+          </p>
+        )
+      }
+      <h1>
+        Hi, I'm {SITE.name}.<br />
+        <span class="grad">I build production GenAI systems.</span>
+      </h1>
+      <p class="lead">
+        AI engineer with 5+ years of experience. I design RAG pipelines, agentic AI platforms, and the backend services that
+        keep them reliable. Right now I'm a forward-deployed engineer helping a US bank take GenAI from idea to production.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="/contact">Work with me</a>
+        <a class="btn" href="/projects">See my work</a>
+        {SITE.resumeUrl && <a class="btn" href={SITE.resumeUrl}>Resume</a>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Selected work</h2>
+        <a href="/projects">All projects →</a>
+      </div>
+      <div class="grid grid-2">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>What I can help with</h2>
+        <a href="/services">Services →</a>
+      </div>
+      <div class="grid grid-2">
+        {
+          SERVICES.map((s) => (
+            <div class="card">
+              <h3>{s.title}</h3>
+              <p class="muted" style="margin:0">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Toolbox</h2>
+      <div class="skills">
+        {
+          SKILLS.map((g) => (
+            <div>
+              <p class="eyebrow">{g.group}</p>
+              <ul class="tags">
+                {g.items.map((i) => <li class="tag">{i}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Latest writing</h2>
+        <a href="/blog">All posts →</a>
+      </div>
+      <PostList posts={posts} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band card">
+      <div>
+        <h2>Have a GenAI idea you want to ship?</h2>
+        <p class="muted" style="margin:0">Tell me about it. I usually reply within a day.</p>
+      </div>
+      <a class="btn btn-primary" href="/contact">Get in touch</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: 96px 0 80px;
+    background:
+      radial-gradient(600px 300px at 15% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+      radial-gradient(500px 300px at 85% 10%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 70%);
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 4px color-mix(in srgb, #22c55e 25%, transparent);
+  }
+  .grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 28px;
+    margin-top: 24px;
+  }
+  .cta-band {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 36px;
+  }
+  .cta-band h2 {
+    margin-bottom: 0.3em;
+  }
+</style>
