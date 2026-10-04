@@ -46,14 +46,16 @@ Copy any file in `src/content/projects/`, then edit it. Set `featured: true` to 
 
 Save a copy of your resume **without your phone number** as `public/resume.pdf`, then set `resumeUrl: '/resume.pdf'` in `src/config.ts`. Resume buttons then appear on the home and About pages.
 
-## Deploy (free) with a custom domain
+## Deployment
 
-1. Push this folder to a new GitHub repository.
-2. On [Vercel](https://vercel.com), [Netlify](https://netlify.com) or [Cloudflare Pages](https://pages.cloudflare.com), import the repo. Astro is auto-detected: the build command is `npm run build` and the output folder is `dist`.
-3. Buy your domain, for example `rajatpal.dev`, then add it under the host's **Domains** settings and follow its DNS instructions.
-4. Update `site` in `astro.config.mjs` and the sitemap line in `public/robots.txt` to the real domain.
+Live at **https://rajatpal.com**, hosted on Cloudflare Pages from the `main` branch of [Raj12351/Portfolio](https://github.com/Raj12351/Portfolio).
 
-Every `git push` after that redeploys the site automatically.
+- Build command: `npm run build`
+- Output directory: `dist`
+- Node version: 22, pinned in `.node-version`
+- Domain registered at Hostinger, with nameservers pointed to Cloudflare
+
+Every `git push` to `main` redeploys the site automatically.
 
 ## Ideas for later
 
