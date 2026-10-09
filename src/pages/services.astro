@@ -35,6 +35,23 @@ const process = [
 
   <section class="section">
     <div class="container">
+      <a class="card web-design" href="/websites">
+        <img src="/images/wmj/kyarki-sunset.webp" alt="" loading="lazy" />
+        <div>
+          <p class="eyebrow">Also</p>
+          <h2>Websites for conscious brands</h2>
+          <p class="muted">
+            Beautiful, calm websites for yoga teachers, retreat hosts, healers and artisans, with bookings, courses and
+            shops built in.
+          </p>
+          <span class="more">See the web design work →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
       <h2>How a project works</h2>
       <ol class="steps">
         {
@@ -62,6 +79,35 @@ const process = [
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+  }
+  .web-design {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 28px;
+    align-items: center;
+    padding: 16px;
+    color: var(--text);
+    transition: border-color 0.15s ease;
+  }
+  .web-design:hover {
+    text-decoration: none;
+    border-color: var(--accent);
+  }
+  .web-design img {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .web-design .more {
+    font-weight: 600;
+    color: var(--accent);
+  }
+  @media (max-width: 700px) {
+    .web-design {
+      grid-template-columns: 1fr;
+    }
   }
   .num {
     display: block;

@@ -1,0 +1,521 @@
+---
+import Demo from '../../../layouts/Demo.astro';
+
+const weeks = [
+  {
+    n: 'Week one',
+    title: 'Arriving',
+    body: 'Morning pages, noticing without judgement, and building a seven-minute ritual you will actually keep.',
+    lessons: ['The empty page', 'Writing the weather inside', 'Small rituals'],
+  },
+  {
+    n: 'Week two',
+    title: 'Remembering',
+    body: 'Letters to younger selves, the places that shaped you, and the stories you have outgrown.',
+    lessons: ['Maps of home', 'Unsent letters', 'Rewriting an old story'],
+  },
+  {
+    n: 'Week three',
+    title: 'Becoming',
+    body: 'Intentions instead of goals, writing with the seasons, and a practice that continues after the course.',
+    lessons: ['Seasonal intentions', 'The future, gently', 'Your own prompt deck'],
+  },
+];
+
+const posts = [
+  { title: 'What the mountains taught me about deadlines', meta: 'Essay · 6 min', image: '/images/wmj/ladakh-thiksey.webp' },
+  { title: 'Seven prompts for a slow Sunday', meta: 'Prompts · 3 min', image: '/images/wmj/pushkar-sunset.webp' },
+  { title: 'Journaling when you feel nothing at all', meta: 'Practice · 5 min', image: '/images/wmj/kyarki-sunset.webp' },
+];
+---
+
+<Demo
+  title="Slow Pages — a 21-day journaling course"
+  description="Concept design for an online journaling course and blog."
+  fonts="family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Instrument+Sans:wght@400;500;600"
+>
+  <div class="sp">
+    <header class="nav wrap">
+      <a class="logo" href="#top">slow <em>pages</em></a>
+      <nav>
+        <a href="#course">The course</a>
+        <a href="#journal">Journal</a>
+        <a class="nav-join" href="#join">Join</a>
+      </nav>
+    </header>
+
+    <section class="hero wrap" id="top">
+      <p class="eyebrow">A 21-day journaling course · next circle starts 1 February 2027</p>
+      <h1>Write your way<br />back to <em>yourself.</em></h1>
+      <p class="lead">
+        Twenty-one gentle prompts, a small circle of fellow writers, and seven quiet minutes each morning. No
+        experience needed, just a notebook and a little curiosity.
+      </p>
+      <div class="cta">
+        <a class="btn" href="#join">Join the circle · ₹3,900</a>
+        <a class="link" href="#prompts">Try 3 free prompts →</a>
+      </div>
+    </section>
+
+    <div class="strip" aria-hidden="true">
+      <img src="/images/wmj/pichola-sunset.webp" alt="" />
+      <img src="/images/wmj/rishikesh-ganga-sunset.webp" alt="" />
+      <img src="/images/wmj/triund-camp.webp" alt="" />
+    </div>
+
+    <section class="course wrap" id="course">
+      <div class="course-head">
+        <p class="eyebrow">Inside the course</p>
+        <h2>Three weeks, three movements</h2>
+        <p>Each day brings one short reading, one prompt, and an optional voice note from me. Write in the morning, or whenever your day allows.</p>
+      </div>
+      <div class="weeks">
+        {
+          weeks.map((w) => (
+            <details open={w.n === 'Week one'}>
+              <summary>
+                <span class="wk">{w.n}</span>
+                <span class="wt">{w.title}</span>
+              </summary>
+              <p>{w.body}</p>
+              <ul>
+                {w.lessons.map((l) => <li>{l}</li>)}
+              </ul>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="prompts" id="prompts">
+      <div class="wrap prompts-grid">
+        <div>
+          <p class="eyebrow light">A page from day four</p>
+          <h2>Writing the weather inside</h2>
+          <p>If your mood this morning were a sky, what would it look like? Describe it in detail: the light, the clouds, what is moving and what is still. Then write what it might need.</p>
+        </div>
+        <div class="paper" aria-label="Sample journal page">
+          <p class="date">Thursday, early</p>
+          <p class="hand">Overcast, but bright at the edges. Something is clearing. I think it needs a slow walk and no news before noon…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="journal wrap" id="journal">
+      <div class="journal-head">
+        <h2>From the journal</h2>
+        <a class="link" href="#journal">All essays →</a>
+      </div>
+      <div class="posts">
+        {
+          posts.map((p) => (
+            <a class="post" href="#journal">
+              <img src={p.image} alt="" loading="lazy" />
+              <p class="meta">{p.meta}</p>
+              <h3>{p.title}</h3>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="join wrap" id="join">
+      <div class="host">
+        <div class="mono" aria-hidden="true">M</div>
+        <div>
+          <p class="eyebrow">Your guide</p>
+          <h2>Hi, I'm Meera.</h2>
+          <p>I've kept a journal for nineteen years, through two countries, one burnout and a great many cups of chai. I started Slow Pages to share the practice that quietly held my life together.</p>
+        </div>
+      </div>
+      <div class="price-card">
+        <p class="eyebrow">February circle</p>
+        <p class="price">₹3,900</p>
+        <ul>
+          <li>21 daily prompts &amp; readings</li>
+          <li>Private circle of 30 writers</li>
+          <li>Two live Sunday sessions</li>
+          <li>Lifetime access to the material</li>
+        </ul>
+        <button type="button" onclick="this.nextElementSibling.hidden = false">Reserve my place</button>
+        <p class="note" hidden>This is a concept design, so there's no checkout here.</p>
+      </div>
+    </section>
+
+    <footer class="foot wrap">
+      <p class="logo">slow <em>pages</em></p>
+      <p>Letters, prompts and courses for unhurried people · hello@example.com</p>
+    </footer>
+  </div>
+</Demo>
+
+<style>
+  .sp {
+    --paper: #f7f3ec;
+    --ink: #1f2a44;
+    --coral: #d97a4a;
+    --muted: #5d6478;
+    --line: #e2d9ca;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 17px/1.7 'Instrument Sans', system-ui, sans-serif;
+  }
+  .sp h1,
+  .sp h2,
+  .sp h3,
+  .logo {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0 0 0.4em;
+  }
+  .sp h2 {
+    font-size: clamp(2rem, 4vw, 2.9rem);
+  }
+  .sp p {
+    margin: 0 0 1em;
+  }
+  em {
+    font-style: italic;
+    color: var(--coral);
+  }
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+  .eyebrow.light {
+    color: #f3b48f;
+  }
+  .link {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--coral);
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 26px;
+    padding-bottom: 26px;
+  }
+  .logo {
+    font-size: 1.7rem;
+    color: var(--ink);
+    text-decoration: none;
+    margin: 0;
+  }
+  .nav nav {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .nav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .nav .nav-join {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7px 18px;
+    border-radius: 999px;
+  }
+
+  .hero {
+    text-align: center;
+    padding-top: clamp(40px, 8vw, 96px);
+    padding-bottom: clamp(40px, 6vw, 72px);
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 6.2rem);
+    line-height: 1;
+  }
+  .lead {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 56ch;
+    margin: 0 auto 1em !important;
+  }
+  .cta {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .btn {
+    background: var(--coral);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 999px;
+  }
+
+  .strip {
+    display: grid;
+    grid-template-columns: 1fr 0.6fr 1fr;
+    gap: 14px;
+    padding: 0 14px;
+  }
+  .strip img {
+    width: 100%;
+    height: clamp(200px, 30vw, 380px);
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .course {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(32px, 6vw, 80px);
+    padding-top: clamp(64px, 9vw, 120px);
+    padding-bottom: clamp(64px, 9vw, 120px);
+  }
+  .course-head p:last-child {
+    color: var(--muted);
+  }
+  details {
+    border-top: 1px solid var(--line);
+    padding: 20px 0;
+  }
+  details:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .wk {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    min-width: 96px;
+  }
+  .wt {
+    font-family: 'Newsreader', serif;
+    font-size: 1.9rem;
+  }
+  .sp details p,
+  .sp details ul {
+    margin: 12px 0 0 114px;
+    color: var(--muted);
+  }
+  details ul {
+    padding-left: 1.1em;
+  }
+
+  .prompts {
+    background: var(--ink);
+    color: #dfe3ee;
+    padding: clamp(64px, 9vw, 110px) 0;
+  }
+  .prompts h2 {
+    color: #fff;
+  }
+  .prompts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+  .paper {
+    background: #fdfaf3 repeating-linear-gradient(transparent 0 31px, #dfe5f0 31px 32px);
+    color: #2a3550;
+    padding: 34px 32px 40px 56px;
+    border-radius: 4px;
+    box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.6);
+    transform: rotate(1.5deg);
+    position: relative;
+    line-height: 32px;
+  }
+  .paper::before {
+    content: '';
+    position: absolute;
+    left: 38px;
+    top: 0;
+    bottom: 0;
+    border-left: 1px solid #f0b7a0;
+  }
+  .date {
+    font-size: 0.85rem;
+    color: var(--coral);
+    margin: 0 !important;
+  }
+  .hand {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 1.35rem;
+    margin: 0 !important;
+  }
+
+  .journal {
+    padding-top: clamp(64px, 9vw, 120px);
+    padding-bottom: clamp(32px, 5vw, 60px);
+  }
+  .journal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 24px;
+  }
+  .post {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .post img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    transition: opacity 0.2s ease;
+  }
+  .post:hover img {
+    opacity: 0.88;
+  }
+  .post:hover h3 {
+    text-decoration: underline;
+    text-decoration-color: var(--coral);
+    text-underline-offset: 4px;
+  }
+  .meta {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 4px !important;
+  }
+  .post h3 {
+    font-size: 1.5rem;
+  }
+
+  .join {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+    padding-top: clamp(48px, 8vw, 100px);
+    padding-bottom: clamp(64px, 9vw, 120px);
+  }
+  .host {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .mono {
+    flex: none;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #f1d5c3;
+    color: var(--coral);
+    font: italic 2.6rem 'Newsreader', serif;
+  }
+  .host p:last-child {
+    color: var(--muted);
+  }
+  .price-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 30px;
+  }
+  .price {
+    font-family: 'Newsreader', serif;
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 18px !important;
+  }
+  .price-card ul {
+    padding-left: 1.1em;
+    color: var(--muted);
+    margin: 0 0 22px;
+  }
+  .price-card button {
+    font: inherit;
+    font-weight: 600;
+    width: 100%;
+    padding: 13px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+    cursor: pointer;
+  }
+  .note {
+    color: var(--coral);
+    font-size: 0.9rem;
+    margin: 12px 0 0 !important;
+  }
+
+  .foot {
+    border-top: 1px solid var(--line);
+    padding-top: 36px;
+    padding-bottom: 44px;
+    text-align: center;
+  }
+  .foot p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .foot .logo {
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 820px) {
+    .course,
+    .prompts-grid,
+    .join {
+      grid-template-columns: 1fr;
+    }
+    .nav nav a:not(.nav-join) {
+      display: none;
+    }
+    .sp details p,
+    .sp details ul {
+      margin-left: 0;
+    }
+    .wk {
+      min-width: 0;
+    }
+    .host {
+      flex-direction: column;
+    }
+    .strip {
+      grid-template-columns: 1fr 1fr;
+    }
+    .strip img:nth-child(2) {
+      display: none;
+    }
+  }
+</style>

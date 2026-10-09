@@ -28,10 +28,36 @@
   color-scheme: light;
 }
 
+/* Warm, fixed palette for the web design pages (not affected by the theme toggle) */
+:root[data-skin='earth'] {
+  --bg: #f6f1e7;
+  --bg-elev: #fffcf6;
+  --bg-soft: #ede5d6;
+  --border: #e0d5c2;
+  --text: #2f2a24;
+  --text-muted: #6e6457;
+  --accent: #3f6b4a;
+  --accent-2: #b4643c;
+  --accent-ink: #fffcf6;
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  color-scheme: light;
+}
+:root[data-skin='earth'] h1,
+:root[data-skin='earth'] h2,
+:root[data-skin='earth'] h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 html {
@@ -238,4 +264,27 @@ pre {
   border: 0;
   border-top: 1px solid var(--border);
   margin: 2.5em 0;
+}
+.prose img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  margin: 1.8em 0;
+}
+:root[data-skin='earth'] .eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--accent-2);
+}
+/* In two-column card grids, let an odd last card span the full row instead of sitting alone */
+@media (min-width: 900px) {
+  .grid-2 > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+:root[data-skin='earth'] .tag {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
 }

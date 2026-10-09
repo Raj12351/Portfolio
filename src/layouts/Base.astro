@@ -7,15 +7,18 @@ import { SITE } from '../config';
 interface Props {
   title?: string;
   description?: string;
+  /** 'earth' is a warm, fixed light palette used by the web design pages. */
+  skin?: 'earth';
+  image?: string;
 }
 
-const { title, description = SITE.description } = Astro.props;
+const { title, description = SITE.description, skin, image } = Astro.props;
 const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-skin={skin}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,26 +33,28 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href={`https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500${skin === 'earth' ? '&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400' : ''}&display=swap`}
       rel="stylesheet"
     />
 
     <script is:inline>
-      // Apply the saved theme before first paint to avoid a flash. Dark is the default.
+      // Apply the saved theme before first paint to avoid a flash. Dark is the default;
+      // skinned pages keep their own fixed palette.
       try {
         const saved = localStorage.getItem('theme');
-        if (saved === 'light') document.documentElement.dataset.theme = 'light';
+        if (saved === 'light' && !document.documentElement.dataset.skin) document.documentElement.dataset.theme = 'light';
       } catch (e) {}
     </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <Header />
+    <Header showThemeToggle={!skin} />
     <main id="main">
       <slot />
     </main>
